@@ -40,6 +40,20 @@
 #define SUSE_PRODUCT(pr, v, pl, aux) 1
 #endif
 
+#if LINUX_VERSION_CODE < KERNEL_VERSION(7, 1, 0)
+
+#include <net/ipv6_stubs.h>
+
+static inline struct dst_entry *
+ovpn_ip6_dst_lookup_flow(struct net *net, const struct sock *sk,
+			 struct flowi6 *fl6, const struct in6_addr *final_dst)
+{
+	return ipv6_stub->ipv6_dst_lookup_flow(net, sk, fl6, final_dst);
+}
+#define ip6_dst_lookup_flow ovpn_ip6_dst_lookup_flow
+
+#endif /* LINUX_VERSION_CODE < KERNEL_VERSION(7, 1, 0) */
+
 #if LINUX_VERSION_CODE < KERNEL_VERSION(6, 17, 0)
 
 #include <net/udp_tunnel.h>

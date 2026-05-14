@@ -430,8 +430,8 @@ static struct in6_addr ovpn_nexthop6(struct ovpn_struct *ovpn, struct in6_addr d
 		.daddr = dst,
 	};
 
-	rt = (struct rt6_info *)ipv6_stub->ipv6_dst_lookup_flow(dev_net(ovpn->dev), NULL, &fl,
-								NULL);
+	rt = (struct rt6_info *)ip6_dst_lookup_flow(dev_net(ovpn->dev), NULL,
+						    &fl, NULL);
 	if (IS_ERR(rt)) {
 		net_dbg_ratelimited("%s: no route to host %pI6\n", __func__, &dst);
 		/* if we end up here this packet is probably going to be thrown away later */
