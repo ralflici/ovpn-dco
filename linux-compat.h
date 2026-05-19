@@ -96,7 +96,6 @@ static inline void ovpn_udp_tunnel6_xmit_skb(struct dst_entry *dst,
 #define UDP_ENCAP_OVPNINUDP 100  /* transport layer */
 #endif
 
-#define timer_container_of from_timer
 
 enum ovpn_ifla_attrs {
 	IFLA_OVPN_UNSPEC = 0,
@@ -113,6 +112,12 @@ enum ovpn_mode {
 
 	__OVPN_MODE_AFTER_LAST,
 };
+
+#if RHEL_RELEASE_CODE < RHEL_RELEASE_VERSION(9, 8)
+
+#define timer_container_of from_timer
+
+#endif /* RHEL_RELEASE_CODE < RHEL_RELEASE_VERSION(9, 6) */
 
 #else
 
