@@ -11,7 +11,7 @@ permissions:
 
 jobs:
   vng-tests:
-    uses: ralflici/ovpn-kmod-ci/.github/workflows/vng-matrix.yml@main
+    uses: ralflici/ovpn-kmod-ci/.github/workflows/vng-matrix.yml@test-new-vng
     with:
       ci-repository: ralflici/ovpn-kmod-ci
       cache-prefix: ovpn-dco
